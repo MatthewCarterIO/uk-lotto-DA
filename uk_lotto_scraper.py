@@ -2,7 +2,7 @@
     File name: uk_lotto_scraper.py
     Author: Matthew Carter
     Date created: 26/12/2019
-    Date last modified: 23/01/2020
+    Date last modified: 29/01/2020
     Python Version: 3.7.6
 
     Note: Only used for educational purposes.
@@ -56,5 +56,6 @@ for url in url_list:
         print("------------------")
 
 # Create a DataFrame from the results dictionary and save to a CSV file.
-lotto_results_df = pd.DataFrame.from_dict(lotto_results_dict, orient='index', columns=["main_balls", "bonus_ball"])
-lotto_results_df.to_csv("lotto_results_df.csv")
+lotto_results_df = pd.DataFrame.from_dict(lotto_results_dict, orient='index',
+                                          columns=["main_balls", "bonus_ball"]).rename_axis('draw_date').reset_index()
+lotto_results_df.to_csv("lotto_results.csv", index=False)
