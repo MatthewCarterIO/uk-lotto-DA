@@ -2,7 +2,7 @@
     File name: uk_lotto_scraper.py
     Author: Matthew Carter
     Date created: 26/12/2019
-    Date last modified: 29/01/2020
+    Date last modified: 31/01/2020
     Python Version: 3.7.6
 
     Note: Only used for educational purposes.
@@ -46,13 +46,15 @@ for url in url_list:
         main_balls_list = []
         main_balls = all_cells[1].find_all('div', {'class': 'result small lotto-ball'})
         for ball in main_balls:
-            main_balls_list.append(ball.text)
+            ball_int = int(ball.text)
+            main_balls_list.append(ball_int)
         print(*main_balls_list, sep=", ")
         # Get the bonus ball drawn, also from second cell in row (position 1).
         bonus_ball = all_cells[1].find('div', {'class': 'result small lotto-bonus-ball'})
-        print(bonus_ball.text)
+        bonus_ball_int = int(bonus_ball.text)
+        print(bonus_ball_int)
         # Add the draw date and balls to the results dictionary.
-        lotto_results_dict[date_datetime] = [main_balls_list, bonus_ball.text]
+        lotto_results_dict[date_datetime] = [main_balls_list, bonus_ball_int]
         print("------------------")
 
 # Create a DataFrame from the results dictionary and save to a CSV file.
